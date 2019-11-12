@@ -253,7 +253,7 @@ uint8_t HAL_GetRadioClkStabilizationDelay(void);
  * \param[out] None
  */
 void HAL_TCXOPowerOn(void);
-
+void HAL_RFSWPowerOn(void);
 /**
  * \brief This function Powering off the TCXO oscillator
  *
@@ -261,7 +261,7 @@ void HAL_TCXOPowerOn(void);
  * \param[out] None
  */
 void HAL_TCXOPowerOff(void);
-
+void HAL_RFSWPowerOff(void);
 /** 
  * \brief This function is used to get the interrupt status
  * The interrupt status is cleared after calling this function

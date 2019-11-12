@@ -90,13 +90,13 @@ void system_board_init(void);
 
 /** \name SW0 definitions
  *  @{ */
-#define SW0_PIN                   PIN_PA28
+/*#define SW0_PIN                   PIN_PA28
 #define SW0_ACTIVE                false
 #define SW0_INACTIVE              !SW0_ACTIVE
 #define SW0_EIC_PIN               PIN_PA28
 #define SW0_EIC_MUX               MUX_PA28A_EIC_EXTINT8
 #define SW0_EIC_PINMUX            PINMUX_PA28A_EIC_EXTINT8
-#define SW0_EIC_LINE              8
+#define SW0_EIC_LINE              8*/
 /** @} */
 
 /** \name RF SWITCH definitions
@@ -108,11 +108,13 @@ void system_board_init(void);
 
 /** \name TCXO PWR Pin definitions
  *  @{ */
-#define TCXO_PWR_PIN				PIN_PA09
+#define TCXO_PWR_PIN				PIN_PB03
 #define TCXO_PWR_ACTIVE             true
 #define TCXO_PWR_INACTIVE	        !TCXO_PWR_ACTIVE
 /** @} */
-
+#define RFSW_PWR_PIN				PIN_PA28
+#define RFSW_PWR_ACTIVE             true
+#define RFSW_PWR_INACTIVE	        !RFSW_PWR_ACTIVE
 
 /**
  * \name LED #0 definitions
@@ -169,14 +171,14 @@ void system_board_init(void);
  * boards.
  *
  *  @{ */
-#define BUTTON_0_NAME             "SW0"
+/*#define BUTTON_0_NAME             "SW0"
 #define BUTTON_0_PIN              SW0_PIN
 #define BUTTON_0_ACTIVE           SW0_ACTIVE
 #define BUTTON_0_INACTIVE         SW0_INACTIVE
 #define BUTTON_0_EIC_PIN          SW0_EIC_PIN
 #define BUTTON_0_EIC_MUX          SW0_EIC_MUX
 #define BUTTON_0_EIC_PINMUX       SW0_EIC_PINMUX
-#define BUTTON_0_EIC_LINE         SW0_EIC_LINE
+#define BUTTON_0_EIC_LINE         SW0_EIC_LINE*/
 /** @} */
 
 /** Number of on-board buttons */

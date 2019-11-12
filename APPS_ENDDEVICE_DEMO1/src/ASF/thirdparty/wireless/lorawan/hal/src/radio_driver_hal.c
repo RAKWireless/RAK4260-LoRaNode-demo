@@ -780,12 +780,16 @@ void HAL_RegisterDioInterruptHandler(uint8_t dioPin, DioInterruptHandler_t handl
 void HAL_EnableRFCtrl(RFCtrl1_t RFCtrl1, RFCtrl2_t RFCtrl2)
 {
 	/* In standard SAMR34_XPRO, Only RFO_HF and PA_BOOST needs to be controlled by a GPIO pin */
-#ifdef RFSWITCH_ENABLE
-   if (RFCtrl1 == RFO_HF)
-   {
-		port_pin_set_output_level(RF_SWITCH_PIN, RF_SWITCH_ACTIVE);		
-   }
-#endif	
+	#ifdef RFSWITCH_ENABLE
+	if ((RFCtrl1 == RFO_HF) || (RFCtrl2 == RX))
+	{
+		port_pin_set_output_level(RF_SWITCH_PIN, RF_SWITCH_ACTIVE);
+	}
+	else if ((RFCtrl1 == PA_BOOST) && (RFCtrl2 == TX))
+	{
+		port_pin_set_output_level(RF_SWITCH_PIN, RF_SWITCH_INACTIVE);
+	}
+	#endif
 }
 
 /**
@@ -804,13 +808,14 @@ void HAL_EnableRFCtrl(RFCtrl1_t RFCtrl1, RFCtrl2_t RFCtrl2)
 void HAL_DisableRFCtrl(RFCtrl1_t RFCtrl1, RFCtrl2_t RFCtrl2)
 {
 	/* In standard SAMR34_XPRO, Only RFO_HF and PA_BOOST needs to be controlled by a GPIO pin */
-#ifdef RFSWITCH_ENABLE
-	if (RFCtrl1 == RFO_HF)
+	#ifdef RFSWITCH_ENABLE
+	if ((RFCtrl1 == RFO_HF) || (RFCtrl2 == RX))
 	{
-		port_pin_set_output_level(RF_SWITCH_PIN, RF_SWITCH_INACTIVE);	
+		port_pin_set_output_level(RF_SWITCH_PIN, RF_SWITCH_INACTIVE);
 	}
-#endif	
+	#endif
 }
+
 
 /**
  * \brief This function gets the time taken for the radio clock to stabilize
@@ -847,7 +852,13 @@ void HAL_TCXOPowerOn(void)
 	delay_ms(RADIO_CLK_STABILITATION_DELAY);
 #endif
 }
-
+void HAL_RFSWPowerOn(void)
+{
+	
+	port_pin_set_output_level(RFSW_PWR_PIN, RFSW_PWR_ACTIVE);
+	delay_ms(RADIO_CLK_STABILITATION_DELAY);
+	
+}
 /**
  * \brief This function Powering off the TCXO oscillator
  *
@@ -859,6 +870,10 @@ void HAL_TCXOPowerOff(void)
 #ifdef TCXO_ENABLE
 	port_pin_set_output_level(TCXO_PWR_PIN, TCXO_PWR_INACTIVE);
 #endif
+}
+void HAL_RFSWPowerOff(void)
+{
+	port_pin_set_output_level(RFSW_PWR_PIN, RFSW_PWR_INACTIVE);
 }
 /**
  End of File

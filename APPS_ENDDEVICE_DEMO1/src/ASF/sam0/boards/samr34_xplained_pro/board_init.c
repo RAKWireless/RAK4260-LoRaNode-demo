@@ -72,9 +72,9 @@ void system_board_init(void)
 	port_pin_set_config(TCXO_PWR_PIN, &pin_conf);
 	port_pin_set_output_level(TCXO_PWR_PIN, TCXO_PWR_INACTIVE);
 #endif
-	/* Set buttons as inputs */
-	pin_conf.direction  = PORT_PIN_DIR_INPUT;
-	pin_conf.input_pull = PORT_PIN_PULL_UP;
-	port_pin_set_config(BUTTON_0_PIN, &pin_conf);
+	/* Configure RFSWITCH SKY13373 PWR as output */
+	pin_conf.direction  = PORT_PIN_DIR_OUTPUT;
+	port_pin_set_config(RFSW_PWR_PIN, &pin_conf);
+	port_pin_set_output_level(RFSW_PWR_PIN, RFSW_PWR_INACTIVE);
 		
 }
